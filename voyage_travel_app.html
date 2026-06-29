@@ -1,0 +1,3083 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Voyage - Premium Travel & Exploration Portal. Discover, plan, and pack for your next dream adventure.">
+  <title>Voyage | Premium Travel & Exploration Portal</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    /* VOYAGE TRAVEL APP - PREMIUM DESIGN SYSTEM */
+
+    /* Theme Variables */
+    :root {
+      /* Common Values */
+      --font-title: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.3);
+
+      /* Dark Theme Default */
+      --bg-app: #090d16;
+      --card-bg: rgba(17, 24, 39, 0.6);
+      --card-bg-hover: rgba(31, 41, 55, 0.8);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-color-focus: rgba(99, 102, 241, 0.6);
+      
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --text-dark: #111827;
+      
+      --primary: #6366f1; /* Indigo */
+      --primary-rgb: 99, 102, 241;
+      --secondary: #a855f7; /* Purple */
+      --accent: #14b8a6; /* Teal */
+      
+      --flight-color: #6366f1;
+      --stay-color: #ec4899;
+      --dining-color: #f59e0b;
+      --activities-color: #10b981;
+    }
+
+    [data-theme="light"] {
+      --bg-app: #f8fafc;
+      --card-bg: rgba(255, 255, 255, 0.7);
+      --card-bg-hover: rgba(255, 255, 255, 0.9);
+      --border-color: rgba(0, 0, 0, 0.08);
+      --border-color-focus: rgba(99, 102, 241, 0.6);
+      
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-dark: #0f172a;
+      
+      --primary: #4f46e5;
+      --primary-rgb: 79, 70, 229;
+      --secondary: #9333ea;
+      --accent: #0d9488;
+      
+      --shadow-glow: 0 0 20px rgba(79, 70, 229, 0.15);
+    }
+
+    /* Global Reset & Base Styling */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-app);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+
+    /* Background Glow Blobs */
+    .bg-glow {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      filter: blur(130px);
+      opacity: 0.15;
+      z-index: -1;
+      pointer-events: none;
+      animation: floatGlow 15s infinite alternate ease-in-out;
+    }
+
+    .bg-glow-1 {
+      background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+      top: -100px;
+      right: -50px;
+    }
+
+    .bg-glow-2 {
+      background: radial-gradient(circle, var(--secondary) 0%, transparent 70%);
+      bottom: -150px;
+      left: -100px;
+      animation-delay: -5s;
+    }
+
+    @keyframes floatGlow {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(60px, 40px) scale(1.2); }
+    }
+
+    /* Layout Container */
+    .app-container {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      background: rgba(var(--bg-app), 0.8);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      color: var(--primary);
+      filter: drop-shadow(0 0 8px rgba(var(--primary-rgb), 0.5));
+    }
+
+    .brand-text {
+      font-family: var(--font-title);
+      font-size: 24px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 10px;
+    }
+
+    .nav-link {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-title);
+      font-size: 15px;
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .nav-icon {
+      width: 18px;
+      height: 18px;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--text-main);
+      background: var(--card-bg);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-link.active {
+      border: 1px solid var(--border-color);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .theme-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: var(--transition);
+    }
+
+    .theme-toggle:hover {
+      background: var(--card-bg-hover);
+      transform: rotate(15deg);
+    }
+
+    .theme-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Render icon states */
+    [data-theme="dark"] .sun-icon { display: block; }
+    [data-theme="dark"] .moon-icon { display: none; }
+    [data-theme="light"] .sun-icon { display: none; }
+    [data-theme="light"] .moon-icon { display: block; }
+
+    /* Main Content Wrapper */
+    .main-content {
+      flex-grow: 1;
+      padding: 30px 0 60px;
+    }
+
+    /* Glassmorphism Card style */
+    .glass-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      transition: var(--transition);
+    }
+
+    .glass-card:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Tab Control - SPA Views */
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.4s ease forwards;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Buttons System */
+    .btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 12px 20px;
+      font-family: var(--font-title);
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border: none;
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      box-shadow: var(--shadow-glow);
+      transform: translateY(-2px);
+      filter: brightness(1.1);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .w-full { width: 100%; }
+    .mt-4 { margin-top: 16px; }
+
+    /* ==================================================== */
+    /* SECTION: EXPLORE (Dashboard / Hero / Grid) */
+    /* ==================================================== */
+
+    .hero-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      padding: 60px 40px;
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      background-image: linear-gradient(135deg, #101827 0%, #1e1b4b 100%);
+      background-size: cover;
+      background-position: center;
+      min-height: 280px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, rgba(9, 13, 22, 0.8) 0%, rgba(9, 13, 22, 0.3) 100%);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 600px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(var(--primary-rgb), 0.2);
+      color: var(--primary);
+      border: 1px solid rgba(var(--primary-rgb), 0.3);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: var(--font-title);
+      font-size: 40px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 12px;
+      background: linear-gradient(to right, #ffffff, #c7d2fe);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    [data-theme="light"] .hero-title {
+      background: linear-gradient(to right, #ffffff, #e0e7ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 16px;
+      color: #94a3b8;
+      margin-bottom: 24px;
+    }
+
+    .search-bar-container {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-sm);
+      padding: 6px 15px;
+      max-width: 500px;
+      transition: var(--transition);
+    }
+
+    .search-bar-container:focus-within {
+      border-color: var(--primary);
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 15px rgba(var(--primary-rgb), 0.2);
+    }
+
+    .search-icon {
+      width: 20px;
+      height: 20px;
+      color: #cbd5e1;
+      margin-right: 12px;
+    }
+
+    .search-bar-container input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #ffffff;
+      font-size: 15px;
+      width: 100%;
+    }
+
+    .search-bar-container input::placeholder {
+      color: #94a3b8;
+    }
+
+    /* Category Filters */
+    .explore-filters {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 30px;
+      overflow-x: auto;
+      padding-bottom: 5px;
+    }
+
+    .explore-filters::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .filter-chip {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-family: var(--font-title);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: var(--transition);
+    }
+
+    .filter-chip:hover {
+      color: var(--text-main);
+      background: var(--card-bg-hover);
+    }
+
+    .filter-chip.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Destinations Cards Grid */
+    .destinations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .dest-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+    }
+
+    .dest-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(var(--primary-rgb), 0.4);
+      box-shadow: var(--shadow-lg), 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .dest-img-container {
+      height: 200px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dest-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .dest-card:hover .dest-image {
+      transform: scale(1.1);
+    }
+
+    .dest-tag {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: rgba(9, 13, 22, 0.6);
+      backdrop-filter: blur(6px);
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .dest-info {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .dest-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .dest-location {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .icon-sm {
+      width: 14px;
+      height: 14px;
+    }
+
+    .dest-rating {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #eab308;
+    }
+
+    .dest-title {
+      font-family: var(--font-title);
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .dest-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .dest-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border-color);
+      padding-top: 15px;
+    }
+
+    .dest-price-label {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .dest-price {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .btn-arrow {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--border-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--text-muted);
+      transition: var(--transition);
+    }
+
+    .dest-card:hover .btn-arrow {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #ffffff;
+      transform: translateX(4px);
+    }
+
+    /* ==================================================== */
+    /* SECTION: TRIP PLANNER */
+    /* ==================================================== */
+
+    .planner-header {
+      margin-bottom: 30px;
+    }
+
+    .section-title {
+      font-family: var(--font-title);
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    .planner-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 30px;
+    }
+
+    /* Budget allocation card */
+    .budget-visualizer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px 0 30px;
+    }
+
+    .budget-chart-container {
+      position: relative;
+      width: 180px;
+      height: 180px;
+    }
+
+    .circular-chart {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .circle-bg {
+      fill: none;
+      stroke: var(--border-color);
+      stroke-width: 3.8;
+    }
+
+    .circle {
+      fill: none;
+      stroke-width: 3.8;
+      stroke-linecap: round;
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%;
+      transition: stroke-dasharray 0.3s ease;
+    }
+
+    .circle-flights { stroke: var(--flight-color); }
+    .circle-stay { stroke: var(--stay-color); }
+    .circle-dining { stroke: var(--dining-color); }
+    .circle-activities { stroke: var(--activities-color); }
+
+    .chart-inner-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chart-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .chart-total-value {
+      font-family: var(--font-title);
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .budget-sliders {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .slider-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .slider-value {
+      font-weight: 700;
+    }
+
+    /* Visual color pills next to sliders */
+    .slider-group::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+      position: absolute;
+      margin-left: -15px;
+      margin-top: 5px;
+    }
+
+    .group-flights { position: relative; padding-left: 15px; }
+    .group-flights::before { background: var(--flight-color); }
+    .group-stay { position: relative; padding-left: 15px; }
+    .group-stay::before { background: var(--stay-color); }
+    .group-dining { position: relative; padding-left: 15px; }
+    .group-dining::before { background: var(--dining-color); }
+    .group-activities { position: relative; padding-left: 15px; }
+    .group-activities::before { background: var(--activities-color); }
+
+    .slider-group input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--border-color);
+      outline: none;
+      transition: background 0.3s;
+    }
+
+    .slider-group input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.1s ease;
+    }
+
+    .group-flights input[type="range"]::-webkit-slider-thumb { background: var(--flight-color); }
+    .group-stay input[type="range"]::-webkit-slider-thumb { background: var(--stay-color); }
+    .group-dining input[type="range"]::-webkit-slider-thumb { background: var(--dining-color); }
+    .group-activities input[type="range"]::-webkit-slider-thumb { background: var(--activities-color); }
+
+    .slider-group input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    /* Itinerary Timeline Styling */
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .custom-select {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-title);
+      font-weight: 600;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .timeline-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .form-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .form-row input {
+      flex-grow: 1;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 10px 15px;
+      border-radius: var(--radius-sm);
+      outline: none;
+      font-size: 14px;
+      transition: var(--transition);
+    }
+
+    .form-row input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.2);
+    }
+
+    .timeline-container {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      padding-left: 24px;
+    }
+
+    .timeline-container::before {
+      content: '';
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      width: 2px;
+      height: calc(100% - 15px);
+      background: var(--border-color);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 24px;
+      animation: slideUp 0.3s ease forwards;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      top: 5px;
+      left: -24px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--primary);
+      border: 3px solid var(--bg-app);
+    }
+
+    .timeline-item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 4px;
+    }
+
+    .timeline-time {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+    }
+
+    .timeline-delete-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: var(--transition);
+    }
+
+    .timeline-delete-btn:hover {
+      color: #ef4444;
+    }
+
+    .timeline-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .timeline-location {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Empty states */
+    .empty-timeline {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 0;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .empty-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 12px;
+      stroke-width: 1.5;
+    }
+
+    /* ==================================================== */
+    /* SECTION: VOYAGEBOT ASSISTANT */
+    /* ==================================================== */
+
+    .assistant-container {
+      display: grid;
+      grid-template-columns: 1fr 2.2fr;
+      gap: 30px;
+      height: calc(100vh - 240px);
+      min-height: 500px;
+    }
+
+    .assistant-info-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .assistant-intro {
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .bot-avatar-large {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto 16px;
+      color: #ffffff;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .bot-avatar-large svg {
+      width: 40px;
+      height: 40px;
+    }
+
+    .assistant-intro h3 {
+      font-family: var(--font-title);
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .assistant-intro p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .quick-prompts-section {
+      border-top: 1px solid var(--border-color);
+      padding-top: 20px;
+    }
+
+    .label-sm {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .quick-chips {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .prompt-chip {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      text-align: left;
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .prompt-chip:hover {
+      border-color: var(--primary);
+      background: var(--card-bg-hover);
+      transform: translateX(4px);
+    }
+
+    /* Chat window card */
+    .chat-card {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .chat-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .chat-header-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-title);
+      font-weight: 600;
+    }
+
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .status-indicator.online {
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    .chat-messages {
+      flex-grow: 1;
+      padding: 24px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .chat-messages::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .chat-messages::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 3px;
+    }
+
+    .chat-bubble {
+      max-width: 80%;
+      display: flex;
+      flex-direction: column;
+      animation: chatEntrance 0.3s ease forwards;
+    }
+
+    @keyframes chatEntrance {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .bubble-text {
+      padding: 12px 18px;
+      border-radius: 18px;
+      font-size: 14px;
+      line-height: 1.5;
+      white-space: pre-line;
+    }
+
+    .bubble-time {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      padding: 0 6px;
+    }
+
+    .bot-bubble {
+      align-self: flex-start;
+    }
+
+    .bot-bubble .bubble-text {
+      background: var(--card-bg-hover);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      border-bottom-left-radius: 4px;
+    }
+
+    .user-bubble {
+      align-self: flex-end;
+      align-items: flex-end;
+    }
+
+    .user-bubble .bubble-text {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #ffffff;
+      border-bottom-right-radius: 4px;
+    }
+
+    /* Chat loader typing indicator */
+    .typing-indicator {
+      display: flex;
+      gap: 4px;
+      padding: 8px 12px;
+    }
+
+    .typing-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      animation: typingBounce 1.4s infinite ease-in-out;
+    }
+
+    .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+    .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+    @keyframes typingBounce {
+      0%, 80%, 100% { transform: scale(0); }
+      40% { transform: scale(1); }
+    }
+
+    .chat-input-area {
+      display: flex;
+      gap: 12px;
+      padding: 20px 24px;
+      border-top: 1px solid var(--border-color);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .chat-input-area input {
+      flex-grow: 1;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      outline: none;
+      font-size: 14px;
+      transition: var(--transition);
+    }
+
+    .chat-input-area input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 10px rgba(var(--primary-rgb), 0.2);
+    }
+
+    .chat-send-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: var(--radius-sm);
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .chat-send-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* ==================================================== */
+    /* SECTION: PACKING CHECKLIST */
+    /* ==================================================== */
+
+    .pack-header-panel {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      gap: 20px;
+    }
+
+    .progress-card {
+      width: 320px;
+      padding: 16px 20px;
+    }
+
+    .progress-details {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .progress-bar-track {
+      width: 100%;
+      height: 8px;
+      border-radius: 4px;
+      background: var(--border-color);
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0;
+      border-radius: 4px;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      transition: width 0.3s ease-out;
+    }
+
+    .progress-ratio {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .pack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .pack-column {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .column-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 12px;
+    }
+
+    .column-title {
+      font-family: var(--font-title);
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .column-count {
+      font-size: 11px;
+      font-weight: 700;
+      background: var(--border-color);
+      padding: 2px 8px;
+      border-radius: 10px;
+      color: var(--text-muted);
+    }
+
+    .checklist-items {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 250px;
+      overflow-y: auto;
+      padding-right: 5px;
+    }
+
+    .checklist-items::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .checklist-items::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 2px;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid transparent;
+      transition: var(--transition);
+    }
+
+    .checklist-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--border-color);
+    }
+
+    .checklist-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      cursor: pointer;
+      flex-grow: 1;
+    }
+
+    .checklist-checkbox {
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 2px solid var(--border-color);
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: var(--transition);
+    }
+
+    .checklist-checkbox::after {
+      content: '';
+      width: 8px;
+      height: 4px;
+      border-left: 2px solid white;
+      border-bottom: 2px solid white;
+      transform: rotate(-45deg) scale(0);
+      transition: var(--transition);
+    }
+
+    .checklist-checkbox:checked {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .checklist-checkbox:checked::after {
+      transform: rotate(-45deg) scale(1);
+    }
+
+    .checklist-text {
+      transition: var(--transition);
+    }
+
+    .checklist-checkbox:checked + .checklist-text {
+      text-decoration: line-through;
+      color: var(--text-muted);
+    }
+
+    .checklist-remove {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      transition: var(--transition);
+      opacity: 0;
+    }
+
+    .checklist-item:hover .checklist-remove {
+      opacity: 1;
+    }
+
+    .checklist-remove:hover {
+      color: #ef4444;
+    }
+
+    .add-item-form {
+      display: flex;
+      gap: 8px;
+      margin-top: 5px;
+    }
+
+    .add-item-form input {
+      flex-grow: 1;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      outline: none;
+      font-size: 13px;
+      transition: var(--transition);
+    }
+
+    .add-item-form input:focus {
+      border-color: var(--primary);
+    }
+
+    .add-item-form button {
+      background: var(--primary);
+      border: none;
+      color: #ffffff;
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-weight: 700;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: var(--transition);
+    }
+
+    .add-item-form button:hover {
+      filter: brightness(1.1);
+    }
+
+    /* ==================================================== */
+    /* MODAL: DESTINATION VIEWER */
+    /* ==================================================== */
+
+    .modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(9, 13, 22, 0.7);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-container {
+      width: 90%;
+      max-width: 800px;
+      max-height: 85vh;
+      overflow-y: auto;
+      position: relative;
+      animation: modalScale 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      padding: 0;
+    }
+
+    @keyframes modalScale {
+      from { transform: scale(0.9) translateY(20px); opacity: 0; }
+      to { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: rgba(9, 13, 22, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      font-size: 24px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+      transition: var(--transition);
+    }
+
+    .modal-close-btn:hover {
+      background: rgba(9, 13, 22, 0.8);
+      transform: rotate(90deg);
+    }
+
+    .modal-image-banner {
+      height: 280px;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .modal-banner-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(9, 13, 22, 0.95) 0%, rgba(9, 13, 22, 0.2) 100%);
+    }
+
+    .modal-banner-content {
+      position: absolute;
+      bottom: 20px;
+      left: 30px;
+      z-index: 2;
+    }
+
+    .modal-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+
+    .modal-title {
+      font-family: var(--font-title);
+      font-size: 32px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .modal-location {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #cbd5e1;
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .modal-body {
+      padding: 30px;
+    }
+
+    .modal-info-columns {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr;
+      gap: 30px;
+    }
+
+    .modal-main-desc h3 {
+      font-family: var(--font-title);
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .modal-main-desc p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .modal-highlights-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .modal-highlights-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+    }
+
+    .modal-highlights-list li::before {
+      content: '✦';
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .modal-side-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .side-stat-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+    }
+
+    .stat-label {
+      display: block;
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .side-stat-box strong {
+      font-family: var(--font-title);
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    /* ==================================================== */
+    /* MOBILE BOTTOM NAVIGATION & MEDIA QUERIES */
+    /* ==================================================== */
+
+    .mobile-nav {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 15px 0;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 64px;
+        background: rgba(var(--bg-app), 0.9);
+        backdrop-filter: blur(16px);
+        border-top: 1px solid var(--border-color);
+        z-index: 100;
+        padding: 0 10px;
+      }
+      
+      .mobile-nav-link {
+        background: transparent;
+        border: none;
+        color: var(--text-muted);
+        font-size: 11px;
+        font-weight: 600;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+      
+      .mobile-icon {
+        width: 20px;
+        height: 20px;
+      }
+      
+      .mobile-nav-link:hover, .mobile-nav-link.active {
+        color: var(--primary);
+      }
+      
+      .app-container {
+        padding: 0 16px;
+      }
+      
+      .main-content {
+        padding: 20px 0 100px; /* space for mobile-nav */
+      }
+      
+      .hero-card {
+        padding: 40px 24px;
+        min-height: 220px;
+      }
+      
+      .hero-title {
+        font-size: 28px;
+      }
+      
+      .planner-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .assistant-container {
+        grid-template-columns: 1fr;
+        height: auto;
+        min-height: auto;
+      }
+      
+      .assistant-info-panel {
+        display: none;
+      }
+      
+      .chat-card {
+        height: 60vh;
+      }
+      
+      .modal-info-columns {
+        grid-template-columns: 1fr;
+      }
+      
+      .modal-side-stats {
+        order: -1;
+      }
+      
+      .pack-header-panel {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .progress-card {
+        width: 100%;
+      }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Particle Decoration -->
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+
+  <!-- Main Application Container -->
+  <div class="app-container">
+    
+    <!-- Navigation Bar -->
+    <header class="navbar">
+      <div class="nav-brand">
+        <svg class="brand-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+        </svg>
+        <span class="brand-text">Voyage</span>
+      </div>
+
+      <nav class="nav-links">
+        <button class="nav-link active" data-target="explore-section">
+          <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+          <span>Explore</span>
+        </button>
+        <button class="nav-link" data-target="plan-section">
+          <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          <span>Trip Planner</span>
+        </button>
+        <button class="nav-link" data-target="assistant-section">
+          <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          <span>VoyageBot</span>
+        </button>
+        <button class="nav-link" data-target="pack-section">
+          <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+          <span>Packer</span>
+        </button>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle Theme">
+          <!-- Sun Icon -->
+          <svg class="theme-icon sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <!-- Moon Icon -->
+          <svg class="theme-icon moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+
+      <!-- SECTION 1: EXPLORE -->
+      <section id="explore-section" class="tab-content active">
+        <div class="hero-card">
+          <div class="hero-overlay"></div>
+          <div class="hero-content">
+            <span class="hero-badge">Adventure Awaits</span>
+            <h1 class="hero-title">Discover Your Next Epic Journey</h1>
+            <p class="hero-subtitle">Explore breathtaking destinations, plan custom budgets, and customize itineraries seamlessly.</p>
+            <div class="search-bar-container">
+              <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" id="destSearchInput" placeholder="Where do you want to go? (e.g., Kyoto, Amalfi...)">
+            </div>
+          </div>
+        </div>
+
+        <div class="explore-filters">
+          <button class="filter-chip active" data-filter="all">All Places</button>
+          <button class="filter-chip" data-filter="beach">Tropical & Beaches</button>
+          <button class="filter-chip" data-filter="nature">Nature & Outdoors</button>
+          <button class="filter-chip" data-filter="culture">Culture & History</button>
+          <button class="filter-chip" data-filter="adventure">Adventure & Thrills</button>
+        </div>
+
+        <div class="destinations-grid" id="destinationsGrid">
+          <!-- Dynamically populated via JS -->
+        </div>
+      </section>
+
+      <!-- SECTION 2: TRIP PLANNER -->
+      <section id="plan-section" class="tab-content">
+        <div class="planner-header">
+          <h2 class="section-title">Trip Planner Dashboard</h2>
+          <p class="section-desc">Design your travel schedule and keep check of your travel budget visually.</p>
+        </div>
+
+        <div class="planner-grid">
+          <!-- Card 1: Budget Calculator -->
+          <div class="glass-card planner-budget-card">
+            <h3 class="card-title">
+              <svg class="title-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+              Budget Allocator
+            </h3>
+            
+            <div class="budget-visualizer">
+              <div class="budget-chart-container">
+                <svg class="circular-chart" viewBox="0 0 36 36">
+                  <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <path class="circle circle-flights" stroke-dasharray="25, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <path class="circle circle-stay" stroke-dasharray="25, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <path class="circle circle-dining" stroke-dasharray="25, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <path class="circle circle-activities" stroke-dasharray="25, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                </svg>
+                <div class="chart-inner-text">
+                  <span class="chart-label">Total Est.</span>
+                  <span class="chart-total-value" id="budgetTotalDisplay">$0</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="budget-sliders">
+              <div class="slider-group group-flights">
+                <div class="slider-header">
+                  <span>Flights & Transport</span>
+                  <span class="slider-value" id="valFlights">$800</span>
+                </div>
+                <input type="range" id="inputFlights" min="0" max="3000" step="50" value="800">
+              </div>
+
+              <div class="slider-group group-stay">
+                <div class="slider-header">
+                  <span>Accommodation / Hotel</span>
+                  <span class="slider-value" id="valStay">$1200</span>
+                </div>
+                <input type="range" id="inputStay" min="0" max="4000" step="50" value="1200">
+              </div>
+
+              <div class="slider-group group-dining">
+                <div class="slider-header">
+                  <span>Dining & Food</span>
+                  <span class="slider-value" id="valDining">$500</span>
+                </div>
+                <input type="range" id="inputDining" min="0" max="2000" step="25" value="500">
+              </div>
+
+              <div class="slider-group group-activities">
+                <div class="slider-header">
+                  <span>Activities & Excursions</span>
+                  <span class="slider-value" id="valActivities">$600</span>
+                </div>
+                <input type="range" id="inputActivities" min="0" max="3000" step="50" value="600">
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Interactive Timeline -->
+          <div class="glass-card planner-timeline-card">
+            <div class="timeline-header">
+              <h3 class="card-title">
+                <svg class="title-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                Itinerary Timeline
+              </h3>
+              <div class="day-filter-container">
+                <select id="itineraryDaySelector" class="custom-select">
+                  <option value="1">Day 1</option>
+                  <option value="2">Day 2</option>
+                  <option value="3">Day 3</option>
+                  <option value="4">Day 4</option>
+                  <option value="5">Day 5</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Timeline Add Form -->
+            <form id="timelineForm" class="timeline-form">
+              <div class="form-row">
+                <input type="text" id="timeInput" placeholder="Time (e.g. 09:00 AM)" required>
+                <input type="text" id="activityInput" placeholder="Activity Title" required>
+              </div>
+              <div class="form-row">
+                <input type="text" id="locationInput" placeholder="Location (optional)">
+                <button type="submit" class="btn btn-primary btn-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  <span>Add Item</span>
+                </button>
+              </div>
+            </form>
+
+            <!-- Timeline Render Area -->
+            <div class="timeline-container" id="timelineList">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: VOYAGEBOT ASSISTANT -->
+      <section id="assistant-section" class="tab-content">
+        <div class="assistant-container">
+          <!-- Sidebar or quick prompts -->
+          <div class="glass-card assistant-info-panel">
+            <div class="assistant-intro">
+              <div class="bot-avatar-large">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 7.54 16.59c-.43.51-1 .73-1.63.59A3 3 0 0 0 12 17a3 3 0 0 0-5.91 2.18c-.62.14-1.2-.08-1.63-.59A10 10 0 0 1 12 2z"></path><circle cx="12" cy="11" r="3"></circle></svg>
+              </div>
+              <h3>VoyageBot</h3>
+              <p>Your instant AI travel concierge. Ask me for packing lists, trip recommendations, or activity suggestions!</p>
+            </div>
+            
+            <div class="quick-prompts-section">
+              <span class="label-sm">Try asking:</span>
+              <div class="quick-chips">
+                <button class="prompt-chip" data-prompt="What should I pack for a 5-day mountain trip?">🏔️ Packing for Mountains</button>
+                <button class="prompt-chip" data-prompt="Give me a 3-day itinerary for Kyoto, Japan.">⛩️ Kyoto 3-Day Itinerary</button>
+                <button class="prompt-chip" data-prompt="How can I travel on a budget in Santorini?">🏖️ Santorini Budget Tips</button>
+                <button class="prompt-chip" data-prompt="Suggest 5 safety tips for solo female travelers.">🛡️ Solo Travel Safety</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chat Screen -->
+          <div class="glass-card chat-card">
+            <div class="chat-header">
+              <div class="chat-header-status">
+                <div class="status-indicator online"></div>
+                <span>VoyageBot AI Agent</span>
+              </div>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+              <!-- Initial Welcome message -->
+              <div class="chat-bubble bot-bubble">
+                <div class="bubble-text">
+                  Hello adventurer! 👋 I am VoyageBot, your personal travel planner. Type a message or click one of the quick suggestions on the side, and I'll generate customized itineraries, packing checklists, or local travel advice for you!
+                </div>
+                <div class="bubble-time">Just now</div>
+              </div>
+            </div>
+
+            <!-- Input area -->
+            <form id="chatForm" class="chat-input-area">
+              <input type="text" id="chatInput" placeholder="Ask about itineraries, travel tips, weather..." autocomplete="off" required>
+              <button type="submit" class="btn btn-primary chat-send-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4: PACKING CHECKLIST -->
+      <section id="pack-section" class="tab-content">
+        <div class="pack-header-panel">
+          <div class="pack-title-area">
+            <h2 class="section-title">Smart Packing Assistant</h2>
+            <p class="section-desc">Create checklists for specific trips. Items are sorted by categories to keep you organized.</p>
+          </div>
+          <!-- Progress bar card -->
+          <div class="glass-card progress-card">
+            <div class="progress-details">
+              <span>Packing Progress</span>
+              <span id="packProgressPercent">0%</span>
+            </div>
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill" id="packProgressBar"></div>
+            </div>
+            <div class="progress-ratio" id="packProgressRatio">0 / 0 items packed</div>
+          </div>
+        </div>
+
+        <div class="pack-grid">
+          <!-- Dynamic Category Columns will load here -->
+          <div class="pack-column glass-card" data-category="documents">
+            <div class="column-header">
+              <h3 class="column-title">Essential Documents</h3>
+              <span class="column-count" id="count-documents">0</span>
+            </div>
+            <div class="checklist-items" id="list-documents">
+              <!-- Loaded via JS -->
+            </div>
+            <form class="add-item-form" data-category="documents">
+              <input type="text" placeholder="Add custom item..." required>
+              <button type="submit">+</button>
+            </form>
+          </div>
+
+          <div class="pack-column glass-card" data-category="clothing">
+            <div class="column-header">
+              <h3 class="column-title">Clothing & Shoes</h3>
+              <span class="column-count" id="count-clothing">0</span>
+            </div>
+            <div class="checklist-items" id="list-clothing">
+              <!-- Loaded via JS -->
+            </div>
+            <form class="add-item-form" data-category="clothing">
+              <input type="text" placeholder="Add custom item..." required>
+              <button type="submit">+</button>
+            </form>
+          </div>
+
+          <div class="pack-column glass-card" data-category="toiletries">
+            <div class="column-header">
+              <h3 class="column-title">Toiletries & Health</h3>
+              <span class="column-count" id="count-toiletries">0</span>
+            </div>
+            <div class="checklist-items" id="list-toiletries">
+              <!-- Loaded via JS -->
+            </div>
+            <form class="add-item-form" data-category="toiletries">
+              <input type="text" placeholder="Add custom item..." required>
+              <button type="submit">+</button>
+            </form>
+          </div>
+
+          <div class="pack-column glass-card" data-category="gear">
+            <div class="column-header">
+              <h3 class="column-title">Electronics & Gear</h3>
+              <span class="column-count" id="count-gear">0</span>
+            </div>
+            <div class="checklist-items" id="list-gear">
+              <!-- Loaded via JS -->
+            </div>
+            <form class="add-item-form" data-category="gear">
+              <input type="text" placeholder="Add custom item..." required>
+              <button type="submit">+</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-nav">
+      <button class="mobile-nav-link active" data-target="explore-section">
+        <svg class="mobile-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+        <span>Explore</span>
+      </button>
+      <button class="mobile-nav-link" data-target="plan-section">
+        <svg class="mobile-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+        <span>Plan</span>
+      </button>
+      <button class="mobile-nav-link" data-target="assistant-section">
+        <svg class="mobile-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        <span>VoyageBot</span>
+      </button>
+      <button class="mobile-nav-link" data-target="pack-section">
+        <svg class="mobile-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+        <span>Pack</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Global Destination Detail Modal -->
+  <div class="modal-backdrop" id="destinationModal">
+    <div class="glass-card modal-container">
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">&times;</button>
+      <div class="modal-image-banner" id="modalImageBanner">
+        <div class="modal-banner-overlay"></div>
+        <div class="modal-banner-content">
+          <span class="modal-badge" id="modalCategory">Category</span>
+          <h2 class="modal-title" id="modalTitle">Kyoto Temple Tour</h2>
+          <p class="modal-location" id="modalLocation">
+            <svg class="icon-sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span id="modalLocationText">Kyoto, Japan</span>
+          </p>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-info-columns">
+          <div class="modal-main-desc">
+            <h3>Overview</h3>
+            <p id="modalDescription">Detailed information about the location...</p>
+            <h3 class="mt-4">Suggested Highlight Itinerary</h3>
+            <ul class="modal-highlights-list" id="modalHighlights">
+              <!-- Dynamically populated -->
+            </ul>
+          </div>
+          <div class="modal-side-stats">
+            <div class="side-stat-box">
+              <span class="stat-label">Best Season</span>
+              <strong id="modalSeason">Spring / Fall</strong>
+            </div>
+            <div class="side-stat-box">
+              <span class="stat-label">Est. Cost / Day</span>
+              <strong id="modalCost">$120 / day</strong>
+            </div>
+            <button class="btn btn-primary w-full mt-4 btn-icon" id="modalBtnPlanTrip">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+              <span>Add to Plan</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ==========================================
+    // 1. DATA: DESTINATIONS DATABASE
+    // ==========================================
+    const destinations = [
+      {
+        id: "kyoto-japan",
+        title: "Kyoto Historic Temples",
+        location: "Kyoto, Japan",
+        costPerDay: 130,
+        rating: 4.9,
+        tag: "Cultural",
+        category: "culture",
+        image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=600&auto=format&fit=crop",
+        description: "Immerse yourself in Japan's imperial history. Kyoto boasts thousands of classical Buddhist temples, gardens, imperial palaces, Shinto shrines, and traditional wooden merchant houses. Renowned for its seasonal cherry blossoms, autumn colors, and culinary traditions.",
+        bestSeason: "Spring (Mar-May) / Autumn (Oct-Nov)",
+        highlights: [
+          "Stroll through the iconic orange arches of Fushimi Inari-taisha Shrine.",
+          "Explore the golden Kinkaku-ji temple reflecting over the mirroring pond.",
+          "Experience a formal tea ceremony in a traditional Gion machiya wooden townhouses.",
+          "Walk among towering stalks in the Arashiyama Bamboo Grove."
+        ]
+      },
+      {
+        id: "amalfi-coast",
+        title: "Amalfi Coast Villages",
+        location: "Campania, Italy",
+        costPerDay: 220,
+        rating: 4.8,
+        tag: "Tropical",
+        category: "beach",
+        image: "https://images.unsplash.com/photo-1533900298318-6b8da08a523e?q=80&w=600&auto=format&fit=crop",
+        description: "The Amalfi Coast is a 50-kilometer stretch of coastline along the southern edge of Italy’s Sorrentine Peninsula. It's a popular holiday destination with sheer cliffs, rugged shoreline dotted with small beaches, and pastel-colored fishing villages cascading down the mountain.",
+        bestSeason: "Late Spring (May) / Early Autumn (Sep)",
+        highlights: [
+          "Wander through Positano's steep, narrow streets lined with boutique shops and cafes.",
+          "Take a private boat tour along the coastline to the Emerald Grotto.",
+          "Hike the famous Sentiero degli Dei (Path of the Gods) trail for breathtaking views.",
+          "Taste fresh limoncello and seafood in Amalfi town."
+        ]
+      },
+      {
+        id: "iceland-adventure",
+        title: "Iceland Fire & Ice",
+        location: "Reykjavik, Iceland",
+        costPerDay: 180,
+        rating: 4.9,
+        tag: "Nature",
+        category: "nature",
+        image: "https://images.unsplash.com/photo-1504893524553-ac55fce69cbf?q=80&w=600&auto=format&fit=crop",
+        description: "Iceland is a Nordic island nation defined by its dramatic landscape with volcanoes, geysers, hot springs, and lava fields. Massive glaciers are protected in Vatnajökull and Snæfellsjökull national parks, while northern lights appear frequently in the winter.",
+        bestSeason: "Summer (Jun-Aug) for Hiking / Winter (Nov-Mar) for Aurora",
+        highlights: [
+          "Drive the Golden Circle route visiting Gullfoss waterfall, Geysir, and Þingvellir.",
+          "Soak in the mineral-rich, milky blue waters of the famous Blue Lagoon.",
+          "Walk along the black sand beach of Reynisfjara and inspect basalt column cliffs.",
+          "Descend into an ice cave inside the Vatnajökull glacier."
+        ]
+      },
+      {
+        id: "serengeti-safari",
+        title: "Serengeti Wildlife Safari",
+        location: "Serengeti, Tanzania",
+        costPerDay: 260,
+        rating: 4.9,
+        tag: "Adventure",
+        category: "adventure",
+        image: "https://images.unsplash.com/photo-1516426122078-c23e76319801?q=80&w=600&auto=format&fit=crop",
+        description: "Tanzania's oldest and most popular national park, a UNESCO World Heritage Site. The Serengeti is famed for its annual migration, when some six million hooves pound the open plains as more than 200,000 zebra and 300,000 Thomson's gazelle join the wildebeest's trek for fresh grazing.",
+        bestSeason: "Dry Season (Jun-Oct)",
+        highlights: [
+          "Witness the dramatic wildebeest river crossings during the Great Migration.",
+          "Take a sunrise hot air balloon flight over the expansive savannah.",
+          "Go on game drives to track the African Big Five (Lion, Leopard, Elephant, Rhino, Buffalo).",
+          "Visit a traditional Maasai village to learn about native cultural customs."
+        ]
+      },
+      {
+        id: "patagonia-trek",
+        title: "Patagonia Wild Glaciers",
+        location: "El Chaltén, Argentina",
+        costPerDay: 110,
+        rating: 4.7,
+        tag: "Nature",
+        category: "nature",
+        image: "https://images.unsplash.com/photo-1527004013197-933c4bb611b3?q=80&w=600&auto=format&fit=crop",
+        description: "Patagonia is a sparse region at the southern end of South America, shared by Argentina and Chile. The Argentine side features arid steppes, grasslands, and deserts, while the Chilean side has glacial fjords and temperate rainforests. A paradise for hikers and mountaineers.",
+        bestSeason: "Summer (Nov-Mar)",
+        highlights: [
+          "Hike the Laguna de los Tres trail to get a close view of the majestic Mount Fitz Roy.",
+          "Walk on the frozen expanse of the massive Perito Moreno Glacier.",
+          "Explore the granite towers of Torres del Paine National Park.",
+          "Navigate the Chilean fjords by kayak alongside penguins."
+        ]
+      },
+      {
+        id: "santorini-getaway",
+        title: "Santorini Sunset Escapes",
+        location: "Cyclades, Greece",
+        costPerDay: 210,
+        rating: 4.8,
+        tag: "Tropical",
+        category: "beach",
+        image: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?q=80&w=600&auto=format&fit=crop",
+        description: "Santorini is one of the Cyclades islands in the Aegean Sea. It was devastated by a volcanic eruption in the 16th century BC, forever shaping its rugged landscape. The giant water-filled caldera is flanked by whitewashed houses clinging to volcanic cliffs.",
+        bestSeason: "Shoulder Season (May-Jun / Sep-Oct)",
+        highlights: [
+          "Watch the world-famous golden hour sunset from the castle ruins in Oia.",
+          "Hike the caldera edge path from Fira to Oia for panoramic volcanic views.",
+          "Swim at the Red Beach and Kamari Black Sand Beach.",
+          "Sample local volcanic wines at cliffside estate wineries."
+        ]
+      }
+    ];
+
+    // ==========================================
+    // 2. STATE VARIABLES
+    // ==========================================
+    let budget = { flights: 800, stay: 1200, dining: 500, activities: 600 };
+    let itinerary = [
+      { id: "1", day: "1", time: "09:00 AM", activity: "Check-in at Hotel & Refresh", location: "Grand Plaza Resort" },
+      { id: "2", day: "1", time: "02:00 PM", activity: "Historic Walking Tour", location: "City Center & Old Quarter" },
+      { id: "3", day: "1", time: "07:30 PM", activity: "Traditional Dinner Experience", location: "Local Tavern & Bistro" },
+      { id: "4", day: "2", time: "10:00 AM", activity: "Guided Museum Excursion", location: "National Heritage Museum" }
+    ];
+    const defaultPackingList = {
+      documents: [
+        { text: "Passport & Visas", checked: true },
+        { text: "Flight Tickets & E-reserves", checked: false },
+        { text: "Hotel Booking Invoices", checked: false },
+        { text: "Travel Insurance Card", checked: false }
+      ],
+      clothing: [
+        { text: "Lightweight T-shirts", checked: false },
+        { text: "Comfy Hiking Shoes", checked: false },
+        { text: "Undergarments & Socks", checked: true },
+        { text: "Waterproof Rain Jacket", checked: false }
+      ],
+      toiletries: [
+        { text: "Toothbrush & Paste", checked: true },
+        { text: "Sunscreen SPF 50+", checked: false },
+        { text: "Hand Sanitizer & Wipes", checked: false },
+        { text: "First-aid Medication", checked: false }
+      ],
+      gear: [
+        { text: "Phone, Camera & Chargers", checked: false },
+        { text: "Universal Wall Adapter", checked: false },
+        { text: "Powerbank (10,000mAh)", checked: true }
+      ]
+    };
+    let packingList = {};
+
+    // ==========================================
+    // 3. MAIN EXPLORE CARD RENDERING
+    // ==========================================
+    function renderDestinationsGrid(filter = "all", searchVal = "") {
+      const container = document.getElementById("destinationsGrid");
+      if (!container) return;
+
+      container.innerHTML = "";
+
+      const filtered = destinations.filter(dest => {
+        const matchesCategory = filter === "all" || dest.category === filter;
+        const matchesSearch = dest.title.toLowerCase().includes(searchVal.toLowerCase()) || 
+                              dest.location.toLowerCase().includes(searchVal.toLowerCase()) ||
+                              dest.tag.toLowerCase().includes(searchVal.toLowerCase());
+        return matchesCategory && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="empty-timeline" style="grid-column: 1 / -1;">
+            <svg class="empty-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+            <h4>No Destinations Found</h4>
+            <p>Try searching for another place or category.</p>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(dest => {
+        const card = document.createElement("div");
+        card.className = "dest-card";
+        card.setAttribute("data-id", dest.id);
+        
+        card.innerHTML = `
+          <div class="dest-img-container">
+            <img class="dest-image" src="${dest.image}" alt="${dest.title}" loading="lazy">
+            <span class="dest-tag">${dest.tag}</span>
+          </div>
+          <div class="dest-info">
+            <div class="dest-meta">
+              <span class="dest-location">
+                <svg class="icon-sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                ${dest.location}
+              </span>
+              <span class="dest-rating">★ ${dest.rating}</span>
+            </div>
+            <h3 class="dest-title">${dest.title}</h3>
+            <p class="dest-desc">${dest.description.substring(0, 100)}...</p>
+            <div class="dest-footer">
+              <div>
+                <span class="dest-price-label">Est. Cost</span>
+                <div class="dest-price">$${dest.costPerDay} <span style="font-size: 12px; font-weight: normal; color: var(--text-muted);">/ day</span></div>
+              </div>
+              <div class="btn-arrow">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </div>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // ==========================================
+    // 4. BUDGET CALCULATOR CONTROLLER
+    // ==========================================
+    function initBudgetCalculator() {
+      const inputFlights = document.getElementById("inputFlights");
+      const inputStay = document.getElementById("inputStay");
+      const inputDining = document.getElementById("inputDining");
+      const inputActivities = document.getElementById("inputActivities");
+
+      const valFlights = document.getElementById("valFlights");
+      const valStay = document.getElementById("valStay");
+      const valDining = document.getElementById("valDining");
+      const valActivities = document.getElementById("valActivities");
+
+      if (!inputFlights) return;
+
+      const savedBudget = localStorage.getItem("voyage_budget");
+      if (savedBudget) {
+        try {
+          budget = JSON.parse(savedBudget);
+          inputFlights.value = budget.flights;
+          inputStay.value = budget.stay;
+          inputDining.value = budget.dining;
+          inputActivities.value = budget.activities;
+        } catch (e) {}
+      }
+
+      const updateSlidersAndChart = () => {
+        budget.flights = parseInt(inputFlights.value) || 0;
+        budget.stay = parseInt(inputStay.value) || 0;
+        budget.dining = parseInt(inputDining.value) || 0;
+        budget.activities = parseInt(inputActivities.value) || 0;
+
+        localStorage.setItem("voyage_budget", JSON.stringify(budget));
+
+        valFlights.textContent = `$${budget.flights}`;
+        valStay.textContent = `$${budget.stay}`;
+        valDining.textContent = `$${budget.dining}`;
+        valActivities.textContent = `$${budget.activities}`;
+
+        renderBudgetChart();
+      };
+
+      [inputFlights, inputStay, inputDining, inputActivities].forEach(slider => {
+        slider.addEventListener("input", updateSlidersAndChart);
+      });
+
+      updateSlidersAndChart();
+    }
+
+    function setBudgetValues(flightsVal, stayVal, diningVal, activitiesVal) {
+      const inputFlights = document.getElementById("inputFlights");
+      const inputStay = document.getElementById("inputStay");
+      const inputDining = document.getElementById("inputDining");
+      const inputActivities = document.getElementById("inputActivities");
+
+      if (inputFlights) inputFlights.value = flightsVal;
+      if (inputStay) inputStay.value = stayVal;
+      if (inputDining) inputDining.value = diningVal;
+      if (inputActivities) inputActivities.value = activitiesVal;
+
+      budget = { flights: flightsVal, stay: stayVal, dining: diningVal, activities: activitiesVal };
+      localStorage.setItem("voyage_budget", JSON.stringify(budget));
+      
+      const valFlights = document.getElementById("valFlights");
+      if (valFlights) valFlights.textContent = `$${flightsVal}`;
+      const valStay = document.getElementById("valStay");
+      if (valStay) valStay.textContent = `$${stayVal}`;
+      const valDining = document.getElementById("valDining");
+      if (valDining) valDining.textContent = `$${diningVal}`;
+      const valActivities = document.getElementById("valActivities");
+      if (valActivities) valActivities.textContent = `$${activitiesVal}`;
+
+      renderBudgetChart();
+    }
+
+    function renderBudgetChart() {
+      const total = budget.flights + budget.stay + budget.dining + budget.activities;
+      const totalDisplay = document.getElementById("budgetTotalDisplay");
+      
+      if (totalDisplay) {
+        totalDisplay.textContent = `$${total.toLocaleString()}`;
+      }
+
+      const circFlights = document.querySelector(".circle-flights");
+      const circStay = document.querySelector(".circle-stay");
+      const circDining = document.querySelector(".circle-dining");
+      const circActivities = document.querySelector(".circle-activities");
+
+      if (!circFlights) return;
+
+      if (total === 0) {
+        [circFlights, circStay, circDining, circActivities].forEach(c => {
+          c.style.strokeDasharray = "0 100";
+          c.style.strokeDashoffset = "0";
+        });
+        return;
+      }
+
+      const pFlights = (budget.flights / total) * 100;
+      const pStay = (budget.stay / total) * 100;
+      const pDining = (budget.dining / total) * 100;
+      const pActivities = (budget.activities / total) * 100;
+
+      circFlights.style.strokeDasharray = `${pFights} 100`;
+      circFlights.style.strokeDashoffset = "0";
+
+      circStay.style.strokeDasharray = `${pStay} 100`;
+      circStay.style.strokeDashoffset = `-${pFights}`;
+
+      circDining.style.strokeDasharray = `${pDining} 100`;
+      circDining.style.strokeDashoffset = `-${pFights + pStay}`;
+
+      circActivities.style.strokeDasharray = `${pActivities} 100`;
+      circActivities.style.strokeDashoffset = `-${pFights + pStay + pDining}`;
+    }
+
+    // ==========================================
+    // 5. ITINERARY TIMELINE CONTROLLER
+    // ==========================================
+    function initItineraryTimeline() {
+      const timelineForm = document.getElementById("timelineForm");
+      const daySelector = document.getElementById("itineraryDaySelector");
+      const timelineList = document.getElementById("timelineList");
+
+      if (!timelineForm) return;
+
+      const savedItinerary = localStorage.getItem("voyage_itinerary");
+      if (savedItinerary) {
+        try {
+          itinerary = JSON.parse(savedItinerary);
+        } catch (e) {}
+      }
+
+      const renderTimeline = () => {
+        const selectedDay = daySelector.value;
+        timelineList.innerHTML = "";
+
+        const dayItems = itinerary
+          .filter(item => item.day === selectedDay)
+          .sort((a, b) => a.time.localeCompare(b.time));
+
+        if (dayItems.length === 0) {
+          timelineList.innerHTML = `
+            <div class="empty-timeline">
+              <svg class="empty-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              <h4>No activities scheduled for Day ${selectedDay}</h4>
+              <p>Add some plans above to start constructing your trip itinerary.</p>
+            </div>
+          `;
+          return;
+        }
+
+        dayItems.forEach(item => {
+          const itemEl = document.createElement("div");
+          itemEl.className = "timeline-item";
+          itemEl.innerHTML = `
+            <div class="timeline-item-header">
+              <span class="timeline-time">${item.time}</span>
+              <button class="timeline-delete-btn" data-id="${item.id}" title="Remove activity">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px;"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+              </button>
+            </div>
+            <div class="timeline-title">${item.activity}</div>
+            ${item.location ? `
+            <div class="timeline-location">
+              <svg class="icon-sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <span>${item.location}</span>
+            </div>` : ''}
+          `;
+          timelineList.appendChild(itemEl);
+        });
+
+        timelineList.querySelectorAll(".timeline-delete-btn").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const id = btn.getAttribute("data-id");
+            itinerary = itinerary.filter(item => item.id !== id);
+            localStorage.setItem("voyage_itinerary", JSON.stringify(itinerary));
+            renderTimeline();
+          });
+        });
+      };
+
+      daySelector.addEventListener("change", renderTimeline);
+
+      // Submit handler
+      timelineForm.onsubmit = (e) => {
+        e.preventDefault();
+        const timeInput = document.getElementById("timeInput");
+        const activityInput = document.getElementById("activityInput");
+        const locationInput = document.getElementById("locationInput");
+
+        const newItem = {
+          id: Date.now().toString(),
+          day: daySelector.value,
+          time: timeInput.value,
+          activity: activityInput.value,
+          location: locationInput.value || ""
+        };
+
+        itinerary.push(newItem);
+        localStorage.setItem("voyage_itinerary", JSON.stringify(itinerary));
+
+        timeInput.value = "";
+        activityInput.value = "";
+        locationInput.value = "";
+
+        renderTimeline();
+      };
+
+      renderTimeline();
+    }
+
+    function importTimelineHighlights(highlights, destinationName) {
+      itinerary = itinerary.filter(item => item.day !== "1");
+
+      const times = ["09:00 AM", "01:00 PM", "04:30 PM", "08:00 PM"];
+      highlights.forEach((h, index) => {
+        const time = times[index] || "12:00 PM";
+        itinerary.push({
+          id: `imported-${Date.now()}-${index}`,
+          day: "1",
+          time: time,
+          activity: h.substring(0, 50),
+          location: destinationName
+        });
+      });
+
+      localStorage.setItem("voyage_itinerary", JSON.stringify(itinerary));
+      initItineraryTimeline();
+    }
+
+    // ==========================================
+    // 6. PACKING ASSISTANT CONTROLLER
+    // ==========================================
+    function initPackingAssistant() {
+      const savedList = localStorage.getItem("voyage_packing");
+      if (savedList) {
+        try {
+          packingList = JSON.parse(savedList);
+        } catch (e) {
+          packingList = { ...defaultPackingList };
+        }
+      } else {
+        packingList = { ...defaultPackingList };
+      }
+
+      renderAllPackingColumns();
+
+      const forms = document.querySelectorAll(".add-item-form");
+      forms.forEach(form => {
+        form.onsubmit = (e) => {
+          e.preventDefault();
+          const cat = form.getAttribute("data-category");
+          const input = form.querySelector("input");
+          const text = input.value.trim();
+
+          if (text) {
+            packingList[cat].push({ text, checked: false });
+            localStorage.setItem("voyage_packing", JSON.stringify(packingList));
+            input.value = "";
+            renderPackingColumn(cat);
+            updateOverallProgress();
+          }
+        };
+      });
+    }
+
+    function renderPackingColumn(category) {
+      const listContainer = document.getElementById(`list-${category}`);
+      const countDisplay = document.getElementById(`count-${category}`);
+      
+      if (!listContainer) return;
+      
+      listContainer.innerHTML = "";
+      const items = packingList[category] || [];
+      countDisplay.textContent = items.length;
+
+      items.forEach((item, index) => {
+        const itemEl = document.createElement("div");
+        itemEl.className = "checklist-item";
+        
+        const uniqueId = `pack-${category}-${index}`;
+        itemEl.innerHTML = `
+          <label class="checklist-label" for="${uniqueId}">
+            <input type="checkbox" id="${uniqueId}" class="checklist-checkbox" ${item.checked ? "checked" : ""}>
+            <span class="checklist-text">${item.text}</span>
+          </label>
+          <button class="checklist-remove" data-category="${category}" data-index="${index}">&times;</button>
+        `;
+
+        const checkbox = itemEl.querySelector(".checklist-checkbox");
+        checkbox.addEventListener("change", () => {
+          packingList[category][index].checked = checkbox.checked;
+          localStorage.setItem("voyage_packing", JSON.stringify(packingList));
+          updateOverallProgress();
+        });
+
+        const removeBtn = itemEl.querySelector(".checklist-remove");
+        removeBtn.addEventListener("click", () => {
+          packingList[category].splice(index, 1);
+          localStorage.setItem("voyage_packing", JSON.stringify(packingList));
+          renderPackingColumn(category);
+          updateOverallProgress();
+        });
+
+        listContainer.appendChild(itemEl);
+      });
+    }
+
+    function renderAllPackingColumns() {
+      const categories = ["documents", "clothing", "toiletries", "gear"];
+      categories.forEach(cat => renderPackingColumn(cat));
+      updateOverallProgress();
+    }
+
+    function updateOverallProgress() {
+      let totalItems = 0;
+      let packedItems = 0;
+
+      Object.values(packingList).forEach(list => {
+        list.forEach(item => {
+          totalItems++;
+          if (item.checked) packedItems++;
+        });
+      });
+
+      const percentDisplay = document.getElementById("packProgressPercent");
+      const barFill = document.getElementById("packProgressBar");
+      const ratioDisplay = document.getElementById("packProgressRatio");
+
+      if (!percentDisplay) return;
+
+      if (totalItems === 0) {
+        percentDisplay.textContent = "0%";
+        barFill.style.width = "0%";
+        ratioDisplay.textContent = "0 / 0 items packed";
+        return;
+      }
+
+      const percent = Math.round((packedItems / totalItems) * 100);
+      percentDisplay.textContent = `${percent}%`;
+      barFill.style.width = `${percent}%`;
+      ratioDisplay.textContent = `${packedItems} / ${totalItems} items packed`;
+    }
+
+    function importPackingList(customItemsList) {
+      customItemsList.forEach(itemText => {
+        let cat = "gear";
+        const textLower = itemText.toLowerCase();
+        
+        if (textLower.includes("passport") || textLower.includes("ticket") || textLower.includes("card") || textLower.includes("license") || textLower.includes("booking")) {
+          cat = "documents";
+        } else if (textLower.includes("shirt") || textLower.includes("shoes") || textLower.includes("pants") || textLower.includes("jacket") || textLower.includes("socks") || textLower.includes("dress")) {
+          cat = "clothing";
+        } else if (textLower.includes("toothbrush") || textLower.includes("shampoo") || textLower.includes("sunscreen") || textLower.includes("cream") || textLower.includes("med")) {
+          cat = "toiletries";
+        }
+
+        packingList[cat].push({ text: itemText, checked: false });
+      });
+
+      localStorage.setItem("voyage_packing", JSON.stringify(packingList));
+      renderAllPackingColumns();
+    }
+
+
+    // ==========================================
+    // 7. VOYAGEBOT AI CHATBOT CONTROLLER
+    // ==========================================
+    const assistantDatabase = {
+      mountainPack: {
+        reply: `Here is a custom packing checklist for a 5-day mountain trip:
+        
+        • Thermal Innerwear (Top & Bottom)
+        • High-grip Waterproof Hiking Boots
+        • Woolen Hiking Socks (3-4 pairs)
+        • Fleece Jacket / Thermal Layer
+        • Beanie & Touchscreen Gloves
+        • Sunglasses & Lip Balm (SPF protection)
+        • Trekking Poles
+        
+        You can import these items directly into your Packer checklist page using the button below.`,
+        button: {
+          text: "📥 Import Items to Packer",
+          action: "import-pack",
+          data: ["Thermal Innerwear", "Hiking Boots", "Woolen Socks", "Fleece Jacket", "Beanie & Gloves", "Trekking Poles"]
+        }
+      },
+      kyotoItinerary: {
+        reply: `Here is a curated 3-day highlight itinerary for Kyoto, Japan:
+        
+        • Day 1: Arrive in Kyoto, explore the Gion historic district, and experience a traditional dinner.
+        • Day 2: Visit Kinkaku-ji (Golden Pavilion) in the morning, and the Arashiyama Bamboo Grove in the afternoon.
+        • Day 3: Morning hike through Fushimi Inari-taisha Shrine gates, then head to Kiyomizu-dera temple.
+        
+        You can import Day 1 highlights into your Trip Planner timeline using the button below.`,
+        button: {
+          text: "⛩️ Load Schedule to Day 1 Timeline",
+          action: "import-itinerary",
+          data: {
+            highlights: [
+              "Arrive in Kyoto & Hotel Check-in",
+              "Explore Gion Historic District",
+              "Gion Traditional Dinner Experience",
+              "Evening Tea & Tea Ceremony"
+            ],
+            location: "Kyoto, Japan"
+          }
+        }
+      },
+      santoriniBudget: {
+        reply: `Here are 4 tips to travel Santorini on a budget:
+        
+        1. **Stay in Fira or Karterados**: Fira has budget hostels, and Karterados is a 15-minute walk from town and much cheaper than cliffside Oia suites.
+        2. **Eat Souvlaki & Gyros**: A delicious local pita wrap costs around $4-$5, saving you a lot compared to formal sit-down dinners.
+        3. **Travel in May or October**: The weather is warm, but hotel prices are sliced by up to 50% compared to July/August.
+        4. **Use the Local Bus**: The KTEL bus network connects all towns (Fira, Oia, Akrotiri, beaches) for just $2 per ticket.
+        
+        Apply a recommended budget ($1,500 total) for a budget-friendly Santorini trip below.`,
+        button: {
+          text: "💶 Apply Santorini Budget to Calculator",
+          action: "import-budget",
+          data: { flights: 600, stay: 450, dining: 250, activities: 200 }
+        }
+      },
+      safetyTips: {
+        reply: `Here are 5 key travel safety tips for travelers:
+        
+        1. **Share Your Itinerary**: Keep a close friend or family member updated with your daily plans, accommodation details, and flight changes.
+        2. **Arrive in Day Light**: Try to book flights/trains that arrive during daylight hours. Finding your hotel in a new city is much safer during the day.
+        3. **Use Offline Maps**: Download Google Maps or Maps.me of the destination offline. It prevents you from looking lost and works when mobile data fails.
+        4. **Secure Your Documents**: Keep digital copies of your passport/ID on your phone and email. Use hotel safes for paper originals.
+        5. **Blend In Locally**: Dress conservatively or matching local standards to avoid drawing attention to yourself as an easy tourist target.`
+      }
+    };
+
+    function initChatbot() {
+      const chatForm = document.getElementById("chatForm");
+      const chatInput = document.getElementById("chatInput");
+      const chatMessages = document.getElementById("chatMessages");
+      const chips = document.querySelectorAll(".prompt-chip");
+
+      if (!chatForm) return;
+
+      chips.forEach(chip => {
+        chip.onclick = () => {
+          const prompt = chip.getAttribute("data-prompt");
+          sendUserMessage(prompt);
+        };
+      });
+
+      chatForm.onsubmit = (e) => {
+        e.preventDefault();
+        const prompt = chatInput.value.trim();
+        if (prompt) {
+          sendUserMessage(prompt);
+          chatInput.value = "";
+        }
+      };
+
+      function sendUserMessage(text) {
+        appendBubble(text, "user");
+        const typingIndicator = showTypingIndicator();
+        scrollToBottom();
+
+        setTimeout(() => {
+          typingIndicator.remove();
+          const botResponse = generateBotReply(text);
+          appendBubble(botResponse.reply, "bot", botResponse.button);
+          scrollToBottom();
+        }, 1200);
+      }
+
+      function appendBubble(text, sender, actionBtn = null) {
+        const bubble = document.createElement("div");
+        bubble.className = `chat-bubble ${sender}-bubble`;
+
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+        bubble.innerHTML = `
+          <div class="bubble-text">${text}</div>
+          <div class="bubble-time">${timeStr}</div>
+        `;
+
+        if (actionBtn) {
+          const btn = document.createElement("button");
+          btn.className = "btn btn-primary mt-4 btn-icon";
+          btn.style.fontSize = "13px";
+          btn.style.padding = "8px 14px";
+          btn.innerHTML = actionBtn.text;
+
+          btn.addEventListener("click", () => {
+            handleActionClick(actionBtn.action, actionBtn.data, btn);
+          });
+
+          bubble.appendChild(btn);
+        }
+
+        chatMessages.appendChild(bubble);
+      }
+
+      function showTypingIndicator() {
+        const indicator = document.createElement("div");
+        indicator.className = "chat-bubble bot-bubble";
+        indicator.innerHTML = `
+          <div class="typing-indicator">
+            <span class="typing-dot"></span>
+            <span class="typing-dot"></span>
+            <span class="typing-dot"></span>
+          </div>
+        `;
+        chatMessages.appendChild(indicator);
+        return indicator;
+      }
+
+      function scrollToBottom() {
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+
+      function generateBotReply(inputText) {
+        const text = inputText.toLowerCase();
+
+        if (text.includes("mountain") || text.includes("pack for a 5-day") || text.includes("hiking")) {
+          return assistantDatabase.mountainPack;
+        }
+        if (text.includes("kyoto") || text.includes("japan") || text.includes("itinerary for kyoto")) {
+          return assistantDatabase.kyotoItinerary;
+        }
+        if (text.includes("santorini") || text.includes("greece") || text.includes("budget in santorini")) {
+          return assistantDatabase.santoriniBudget;
+        }
+        if (text.includes("safety") || text.includes("solo") || text.includes("female")) {
+          return assistantDatabase.safetyTips;
+        }
+
+        if (text.includes("hello") || text.includes("hi ") || text.includes("hey")) {
+          return {
+            reply: `Hello there! I am VoyageBot. How can I assist you with your travels today? 🌍\n\nYou can ask me for packing checklists, itineraries (like Kyoto, Japan), budget travel hacks, or safety guidelines!`
+          };
+        }
+
+        if (text.includes("weather")) {
+          return {
+            reply: `Most popular destinations are experiencing perfect traveling weather right now! For example, Kyoto is looking clear and ideal for sightseeing, whereas Santorini is sunny and perfect for caldera hikes. Which destination are you planning to visit?`
+          };
+        }
+
+        if (text.includes("thank")) {
+          return {
+            reply: `You're very welcome! If you need any more recommendations, just ask. Safe travels! ✈️`
+          };
+        }
+
+        return {
+          reply: `That sounds like an amazing trip! To help you best, here are a few things I can do for you:
+          
+          • Plan a packing checklist (try typing: "pack for mountains")
+          • Draft a custom daily schedule (try typing: "itinerary for Kyoto")
+          • Give you travel budget insights (try typing: "budget in Santorini")
+          • Share solo travel security tips (try typing: "safety tips")`
+        };
+      }
+
+      function handleActionClick(action, data, btnElement) {
+        if (action === "import-pack") {
+          importPackingList(data);
+          btnElement.textContent = "✓ Imported successfully!";
+          btnElement.style.background = "var(--accent)";
+          btnElement.disabled = true;
+          appendSystemMessage("Items successfully added to your Packer list!");
+        } 
+        else if (action === "import-itinerary") {
+          importTimelineHighlights(data.highlights, data.location);
+          btnElement.textContent = "✓ Timeline Loaded!";
+          btnElement.style.background = "var(--accent)";
+          btnElement.disabled = true;
+          appendSystemMessage("Kyoto tour scheduled to your Trip Planner (Day 1)!");
+        } 
+        else if (action === "import-budget") {
+          setBudgetValues(data.flights, data.stay, data.dining, data.activities);
+          btnElement.textContent = "✓ Budget Applied!";
+          btnElement.style.background = "var(--accent)";
+          btnElement.disabled = true;
+          appendSystemMessage("Budget limits applied to your Budget Allocator!");
+        }
+      }
+
+      function appendSystemMessage(msg) {
+        const sysBubble = document.createElement("div");
+        sysBubble.className = "chat-bubble bot-bubble";
+        sysBubble.style.opacity = "0.85";
+        sysBubble.innerHTML = `
+          <div class="bubble-text" style="background: rgba(20, 184, 166, 0.1); border: 1px dashed var(--accent); color: var(--accent); font-weight: 500; font-size: 13px; text-align: center;">
+            ⚙️ System: ${msg}
+          </div>
+        `;
+        chatMessages.appendChild(sysBubble);
+        scrollToBottom();
+      }
+    }
+
+
+    // ==========================================
+    // 8. COORDINATOR & PAGE INITIALIZER
+    // ==========================================
+    document.addEventListener("DOMContentLoaded", () => {
+      let activeFilter = "all";
+      let searchVal = "";
+
+      // Run controllers
+      initBudgetCalculator();
+      initItineraryTimeline();
+      initPackingAssistant();
+      initChatbot();
+
+      // Draw grid
+      renderDestinationsGrid(activeFilter, searchVal);
+
+      // Section Tabs switcher
+      const navLinks = document.querySelectorAll(".nav-link");
+      const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+      const sections = document.querySelectorAll(".tab-content");
+
+      const switchTab = (targetId) => {
+        sections.forEach(sec => sec.classList.remove("active"));
+        navLinks.forEach(link => link.classList.remove("active"));
+        mobileNavLinks.forEach(link => link.classList.remove("active"));
+
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+          targetSection.classList.add("active");
+        }
+
+        document.querySelectorAll(`[data-target="${targetId}"]`).forEach(el => {
+          el.classList.add("active");
+        });
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      };
+
+      navLinks.forEach(link => {
+        link.addEventListener("click", () => {
+          switchTab(link.getAttribute("data-target"));
+        });
+      });
+
+      mobileNavLinks.forEach(link => {
+        link.addEventListener("click", () => {
+          switchTab(link.getAttribute("data-target"));
+        });
+      });
+
+      // Light/Dark Theme selector
+      const themeToggleBtn = document.getElementById("themeToggleBtn");
+      const htmlElement = document.documentElement;
+      const savedTheme = localStorage.getItem("voyage_theme") || "dark";
+      htmlElement.setAttribute("data-theme", savedTheme);
+
+      themeToggleBtn.addEventListener("click", () => {
+        const currentTheme = htmlElement.getAttribute("data-theme");
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+        htmlElement.setAttribute("data-theme", newTheme);
+        localStorage.setItem("voyage_theme", newTheme);
+      });
+
+      // Explore Page Filters
+      const searchInput = document.getElementById("destSearchInput");
+      const filterChips = document.querySelectorAll(".filter-chip");
+
+      searchInput.addEventListener("input", (e) => {
+        searchVal = e.target.value;
+        renderDestinationsGrid(activeFilter, searchVal);
+        bindCardClicks();
+      });
+
+      filterChips.forEach(chip => {
+        chip.addEventListener("click", () => {
+          filterChips.forEach(c => c.classList.remove("active"));
+          chip.classList.add("active");
+          
+          activeFilter = chip.getAttribute("data-filter");
+          renderDestinationsGrid(activeFilter, searchVal);
+          bindCardClicks();
+        });
+      });
+
+      // Modal Triggers
+      const modal = document.getElementById("destinationModal");
+      const modalCloseBtn = document.getElementById("modalCloseBtn");
+      const modalBtnPlanTrip = document.getElementById("modalBtnPlanTrip");
+      let activeModalDest = null;
+
+      const openModal = (destId) => {
+        const dest = destinations.find(d => d.id === destId);
+        if (!dest) return;
+
+        activeModalDest = dest;
+
+        const modalImageBanner = document.getElementById("modalImageBanner");
+        const modalCategory = document.getElementById("modalCategory");
+        const modalTitle = document.getElementById("modalTitle");
+        const modalLocationText = document.getElementById("modalLocationText");
+        const modalDescription = document.getElementById("modalDescription");
+        const modalHighlights = document.getElementById("modalHighlights");
+        const modalSeason = document.getElementById("modalSeason");
+        const modalCost = document.getElementById("modalCost");
+
+        modalImageBanner.style.backgroundImage = `url('${dest.image}')`;
+        modalCategory.textContent = dest.tag;
+        modalTitle.textContent = dest.title;
+        modalLocationText.textContent = dest.location;
+        modalDescription.textContent = dest.description;
+        modalSeason.textContent = dest.bestSeason;
+        modalCost.textContent = `$${dest.costPerDay} / day`;
+
+        modalHighlights.innerHTML = "";
+        dest.highlights.forEach(h => {
+          const li = document.createElement("li");
+          li.textContent = h;
+          modalHighlights.appendChild(li);
+        });
+
+        modal.classList.add("open");
+      };
+
+      const closeModal = () => {
+        modal.classList.remove("open");
+        activeModalDest = null;
+      };
+
+      function bindCardClicks() {
+        const cards = document.querySelectorAll(".dest-card");
+        cards.forEach(card => {
+          card.onclick = () => {
+            const destId = card.getAttribute("data-id");
+            openModal(destId);
+          };
+        });
+      }
+
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+      });
+
+      modalCloseBtn.addEventListener("click", closeModal);
+
+      // Book/Plan Button Modal Link
+      modalBtnPlanTrip.onclick = () => {
+        if (!activeModalDest) return;
+
+        const costPerDay = activeModalDest.costPerDay;
+        const flights = 600;
+        const stay = costPerDay * 5;
+        const dining = 50 * 5;
+        const activities = 80 * 5;
+        
+        setBudgetValues(flights, stay, dining, activities);
+        importTimelineHighlights(activeModalDest.highlights, activeModalDest.title);
+        
+        closeModal();
+        switchTab("plan-section");
+      };
+
+      bindCardClicks();
+    });
+  </script>
+</body>
+</html>

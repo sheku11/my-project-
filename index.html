@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Voyage - Premium Travel & Exploration Portal. Discover, plan, and pack for your next dream adventure.">
+  <title>Voyage | Premium Travel & Exploration Portal</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background Particle Decoration -->
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+
+  <!-- Main Application Container -->
+  <div class="app-container">
+    
+    <!-- Navigation Bar -->
+    <header class="navbar">
+      <div class="nav-brand">
+        <svg class="brand-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+        </svg>
+        <span class="brand-text">Voyage</span>
+      </div>
+
+      <nav class="nav-links">
+        <button class="nav-link active" data-target="explore-section">
+          <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+          <span>Explore</span>
+        </button>
+        <button class="nav-link" data-target="plan-section">
+          <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          <span>Trip Planner</span>
+        </button>
+        <button class="nav-link" data-target="assistant-section">
+          <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          <span>VoyageBot</span>
+        </button>
+        <button class="nav-link" data-target="pack-section">
+          <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+          <span>Packer</span>
+        </button>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle Theme">
+          <!-- Sun Icon -->
+          <svg class="theme-icon sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <!-- Moon Icon -->
+          <svg class="theme-icon moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+
+      <!-- SECTION 1: EXPLORE -->
+      <section id="explore-section" class="tab-content active">
+        <div class="hero-card">
+          <div class="hero-overlay"></div>
+          <div class="hero-content">
+            <span class="hero-badge">Adventure Awaits</span>
+            <h1 class="hero-title">Discover Your Next Epic Journey</h1>
+            <p class="hero-subtitle">Explore breathtaking destinations, plan custom budgets, and customize itineraries seamlessly.</p>
+            <div class="search-bar-container">
+              <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" id="destSearchInput" placeholder="Where do you want to go? (e.g., Kyoto, Amalfi...)">
+            </div>
+          </div>
+        </div>
+
+        <div class="explore-filters">
+          <button class="filter-chip active" data-filter="all">All Places</button>
+          <button class="filter-chip" data-filter="beach">Tropical & Beaches</button>
+          <button class="filter-chip" data-filter="nature">Nature & Outdoors</button>
+          <button class="filter-chip" data-filter="culture">Culture & History</button>
+          <button class="filter-chip" data-filter="adventure">Adventure & Thrills</button>
+        </div>
+
+        <div class="destinations-grid" id="destinationsGrid">
+          <!-- Dynamically populated via JS -->
+        </div>
+      </section>
+
+      <!-- SECTION 2: TRIP PLANNER -->
+      <section id="plan-section" class="tab-content">
+        <div class="planner-header">
+          <h2 class="section-title">Trip Planner Dashboard</h2>
+          <p class="section-desc">Design your travel schedule and keep check of your travel budget visually.</p>
+        </div>
+
+        <div class="planner-grid">
+          <!-- Card 1: Budget Calculator -->
+          <div class="glass-card planner-budget-card">
+            <h3 class="card-title">
+              <svg class="title-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+              Budget Allocator
+            </h3>
+            
+            <div class="budget-visualizer">
+              <div class="budget-chart-container">
+                <svg class="circular-chart" viewBox="0 0 36 36">
+                  <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <path class="circle circle-flights" stroke-dasharray="25, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <path class="circle circle-stay" stroke-dasharray="25, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <path class="circle circle-dining" stroke-dasharray="25, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                  <path class="circle circle-activities" stroke-dasharray="25, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                </svg>
+                <div class="chart-inner-text">
+                  <span class="chart-label">Total Est.</span>
+                  <span class="chart-total-value" id="budgetTotalDisplay">$0</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="budget-sliders">
+              <div class="slider-group group-flights">
+                <div class="slider-header">
+                  <span>Flights & Transport</span>
+                  <span class="slider-value" id="valFlights">$800</span>
+                </div>
+                <input type="range" id="inputFlights" min="0" max="3000" step="50" value="800">
+              </div>
+
+              <div class="slider-group group-stay">
+                <div class="slider-header">
+                  <span>Accommodation / Hotel</span>
+                  <span class="slider-value" id="valStay">$1200</span>
+                </div>
+                <input type="range" id="inputStay" min="0" max="4000" step="50" value="1200">
+              </div>
+
+              <div class="slider-group group-dining">
+                <div class="slider-header">
+                  <span>Dining & Food</span>
+                  <span class="slider-value" id="valDining">$500</span>
+                </div>
+                <input type="range" id="inputDining" min="0" max="2000" step="25" value="500">
+              </div>
+
+              <div class="slider-group group-activities">
+                <div class="slider-header">
+                  <span>Activities & Excursions</span>
+                  <span class="slider-value" id="valActivities">$600</span>
+                </div>
+                <input type="range" id="inputActivities" min="0" max="3000" step="50" value="600">
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Interactive Timeline -->
+          <div class="glass-card planner-timeline-card">
+            <div class="timeline-header">
+              <h3 class="card-title">
+                <svg class="title-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                Itinerary Timeline
+              </h3>
+              <div class="day-filter-container">
+                <select id="itineraryDaySelector" class="custom-select">
+                  <option value="1">Day 1</option>
+                  <option value="2">Day 2</option>
+                  <option value="3">Day 3</option>
+                  <option value="4">Day 4</option>
+                  <option value="5">Day 5</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Timeline Add Form -->
+            <form id="timelineForm" class="timeline-form">
+              <div class="form-row">
+                <input type="text" id="timeInput" placeholder="Time (e.g. 09:00 AM)" required>
+                <input type="text" id="activityInput" placeholder="Activity Title" required>
+              </div>
+              <div class="form-row">
+                <input type="text" id="locationInput" placeholder="Location (optional)">
+                <button type="submit" class="btn btn-primary btn-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  <span>Add Item</span>
+                </button>
+              </div>
+            </form>
+
+            <!-- Timeline Render Area -->
+            <div class="timeline-container" id="timelineList">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: VOYAGEBOT ASSISTANT -->
+      <section id="assistant-section" class="tab-content">
+        <div class="assistant-container">
+          <!-- Sidebar or quick prompts -->
+          <div class="glass-card assistant-info-panel">
+            <div class="assistant-intro">
+              <div class="bot-avatar-large">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 7.54 16.59c-.43.51-1 .73-1.63.59A3 3 0 0 0 12 17a3 3 0 0 0-5.91 2.18c-.62.14-1.2-.08-1.63-.59A10 10 0 0 1 12 2z"></path><circle cx="12" cy="11" r="3"></circle></svg>
+              </div>
+              <h3>VoyageBot</h3>
+              <p>Your instant AI travel concierge. Ask me for packing lists, trip recommendations, or activity suggestions!</p>
+            </div>
+            
+            <div class="quick-prompts-section">
+              <span class="label-sm">Try asking:</span>
+              <div class="quick-chips">
+                <button class="prompt-chip" data-prompt="What should I pack for a 5-day mountain trip?">🏔️ Packing for Mountains</button>
+                <button class="prompt-chip" data-prompt="Give me a 3-day itinerary for Kyoto, Japan.">⛩️ Kyoto 3-Day Itinerary</button>
+                <button class="prompt-chip" data-prompt="How can I travel on a budget in Santorini?">🏖️ Santorini Budget Tips</button>
+                <button class="prompt-chip" data-prompt="Suggest 5 safety tips for solo female travelers.">🛡️ Solo Travel Safety</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chat Screen -->
+          <div class="glass-card chat-card">
+            <div class="chat-header">
+              <div class="chat-header-status">
+                <div class="status-indicator online"></div>
+                <span>VoyageBot AI Agent</span>
+              </div>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+              <!-- Initial Welcome message -->
+              <div class="chat-bubble bot-bubble">
+                <div class="bubble-text">
+                  Hello adventurer! 👋 I am VoyageBot, your personal travel planner. Type a message or click one of the quick suggestions on the side, and I'll generate customized itineraries, packing checklists, or local travel advice for you!
+                </div>
+                <div class="bubble-time">Just now</div>
+              </div>
+            </div>
+
+            <!-- Input area -->
+            <form id="chatForm" class="chat-input-area">
+              <input type="text" id="chatInput" placeholder="Ask about itineraries, travel tips, weather..." autocomplete="off" required>
+              <button type="submit" class="btn btn-primary chat-send-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4: PACKING CHECKLIST -->
+      <section id="pack-section" class="tab-content">
+        <div class="pack-header-panel">
+          <div class="pack-title-area">
+            <h2 class="section-title">Smart Packing Assistant</h2>
+            <p class="section-desc">Create checklists for specific trips. Items are sorted by categories to keep you organized.</p>
+          </div>
+          <!-- Progress bar card -->
+          <div class="glass-card progress-card">
+            <div class="progress-details">
+              <span>Packing Progress</span>
+              <span id="packProgressPercent">0%</span>
+            </div>
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill" id="packProgressBar"></div>
+            </div>
+            <div class="progress-ratio" id="packProgressRatio">0 / 0 items packed</div>
+          </div>
+        </div>
+
+        <div class="pack-grid">
+          <!-- Dynamic Category Columns will load here -->
+          <div class="pack-column glass-card" data-category="documents">
+            <div class="column-header">
+              <h3 class="column-title">Essential Documents</h3>
+              <span class="column-count" id="count-documents">0</span>
+            </div>
+            <div class="checklist-items" id="list-documents">
+              <!-- Loaded via JS -->
+            </div>
+            <form class="add-item-form" data-category="documents">
+              <input type="text" placeholder="Add custom item..." required>
+              <button type="submit">+</button>
+            </form>
+          </div>
+
+          <div class="pack-column glass-card" data-category="clothing">
+            <div class="column-header">
+              <h3 class="column-title">Clothing & Shoes</h3>
+              <span class="column-count" id="count-clothing">0</span>
+            </div>
+            <div class="checklist-items" id="list-clothing">
+              <!-- Loaded via JS -->
+            </div>
+            <form class="add-item-form" data-category="clothing">
+              <input type="text" placeholder="Add custom item..." required>
+              <button type="submit">+</button>
+            </form>
+          </div>
+
+          <div class="pack-column glass-card" data-category="toiletries">
+            <div class="column-header">
+              <h3 class="column-title">Toiletries & Health</h3>
+              <span class="column-count" id="count-toiletries">0</span>
+            </div>
+            <div class="checklist-items" id="list-toiletries">
+              <!-- Loaded via JS -->
+            </div>
+            <form class="add-item-form" data-category="toiletries">
+              <input type="text" placeholder="Add custom item..." required>
+              <button type="submit">+</button>
+            </form>
+          </div>
+
+          <div class="pack-column glass-card" data-category="gear">
+            <div class="column-header">
+              <h3 class="column-title">Electronics & Gear</h3>
+              <span class="column-count" id="count-gear">0</span>
+            </div>
+            <div class="checklist-items" id="list-gear">
+              <!-- Loaded via JS -->
+            </div>
+            <form class="add-item-form" data-category="gear">
+              <input type="text" placeholder="Add custom item..." required>
+              <button type="submit">+</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-nav">
+      <button class="mobile-nav-link active" data-target="explore-section">
+        <svg class="mobile-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+        <span>Explore</span>
+      </button>
+      <button class="mobile-nav-link" data-target="plan-section">
+        <svg class="mobile-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+        <span>Plan</span>
+      </button>
+      <button class="mobile-nav-link" data-target="assistant-section">
+        <svg class="mobile-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        <span>VoyageBot</span>
+      </button>
+      <button class="mobile-nav-link" data-target="pack-section">
+        <svg class="mobile-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+        <span>Pack</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Global Destination Detail Modal -->
+  <div class="modal-backdrop" id="destinationModal">
+    <div class="glass-card modal-container">
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">&times;</button>
+      <div class="modal-image-banner" id="modalImageBanner">
+        <div class="modal-banner-overlay"></div>
+        <div class="modal-banner-content">
+          <span class="modal-badge" id="modalCategory">Category</span>
+          <h2 class="modal-title" id="modalTitle">Kyoto Temple Tour</h2>
+          <p class="modal-location" id="modalLocation">
+            <svg class="icon-sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span id="modalLocationText">Kyoto, Japan</span>
+          </p>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-info-columns">
+          <div class="modal-main-desc">
+            <h3>Overview</h3>
+            <p id="modalDescription">Detailed information about the location...</p>
+            <h3 class="mt-4">Suggested Highlight Itinerary</h3>
+            <ul class="modal-highlights-list" id="modalHighlights">
+              <!-- Dynamically populated -->
+            </ul>
+          </div>
+          <div class="modal-side-stats">
+            <div class="side-stat-box">
+              <span class="stat-label">Best Season</span>
+              <strong id="modalSeason">Spring / Fall</strong>
+            </div>
+            <div class="side-stat-box">
+              <span class="stat-label">Est. Cost / Day</span>
+              <strong id="modalCost">$120 / day</strong>
+            </div>
+            <button class="btn btn-primary w-full mt-4 btn-icon" id="modalBtnPlanTrip">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+              <span>Add to Plan</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Core Javascript Modules -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
