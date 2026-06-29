@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 1. Initial State Setup
   let activeFilter = "all";
   let searchVal = "";
-
+// my name is kunal 
   // Initialize Sub-modules
   initBudgetCalculator();
   initItineraryTimeline();
